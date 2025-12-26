@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🧠 神经重塑器</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 使其可安装到主屏幕 -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#f8f9fa">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1>🧠 神经重塑器</h1>
+            <p class="subtitle">点击你的旧模式，开始改变</p>
+        </header>
+
+        <main class="pattern-list" id="patternList">
+            <!-- 旧模式列表将由JavaScript动态生成 -->
+        </main>
+
+        <footer class="app-footer">
+            <p>极简哲学：觉察 → 中断 → 重建 → 记录</p>
+        </footer>
+    </div>
+
+    <!-- 记录面板 (默认隐藏) -->
+    <div class="record-panel" id="recordPanel" style="display:none;">
+        <div class="record-content">
+            <h3>📝 今日重塑记录</h3>
+            <ul id="recordList"></ul>
+            <button onclick="hideRecords()">关闭</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
