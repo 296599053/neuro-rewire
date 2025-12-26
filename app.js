@@ -1,5 +1,14 @@
 // ==================== 1. 心理学产品数据库 ====================
 const OLD_PATTERNS = [
+    // 请将这段代码添加到 app.js 的 OLD_PATTERNS 数组中（建议放在第一位）
+{
+    id: '0', // 特殊ID，置顶显示
+    name: '🚫 想象循环',
+    desc: '想象她喜欢别人并自我贬低',
+    why: '这是大脑的【威胁模拟系统】和【社会比较系统】联合过载。前额叶的理性判断被杏仁核的“社交威胁警报”劫持，导致你在心理上反复排练并不存在的失败场景。',
+    stop: '物理中断：双手握拳10秒 → 松开，感受指尖触感 → 喝一口冷水',
+    replace: '问自己：“这个想象是基于事实证据，还是基于我的不安全感编程？” → 写下1个客观事实（如：“我们没有在交往”）'
+},
     {
         id: '1',
         name: '🧠 思维反刍',
@@ -314,7 +323,42 @@ function completeRecord() {
     saveRecords();
     currentStep = 4;
     showStepModal();
+
+    if (currentPattern.name === '🚫 想象循环') {
+    newRecord.specialTags = ['social_imagination'];
+    newRecord.triggerType = prompt('这次想象是如何触发的？\n（例如：看到社交媒体、空闲时、睡前）');
+    newRecord.intensity = prompt('从1-10分，这个想象的强迫感有多强？');
 }
+}
+
+// 在 completeRecord() 函数后，添加这个专属强化函数
+function reinforceSocialPattern(record) {
+    // 专属的强化逻辑
+    const affirmations = [
+        "我的价值不依赖于任何人的选择。",
+        "我尊重她的自主性，正如我尊重自己的。",
+        "我的大脑在练习‘放手’这个技能。",
+        "想象不是预言，而是我的安全感在说话。"
+    ];
+    
+    const randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
+    
+    // 可以记录到专属的加固日志
+    const reinforcementLog = {
+        pattern: '社交想象',
+        timestamp: new Date().toISOString(),
+        originalMood: record.mood,
+        affirmation: randomAffirmation,
+        insight: '每次中断，都在弱化“过度模拟”的神经通路。'
+    };
+    
+    console.log('强化记录:', reinforcementLog); // 后续可存入独立存储
+    return randomAffirmation;
+}
+
+// 然后在 completeRecord() 中调用（在保存记录后）：
+// const affirmation = reinforceSocialPattern(newRecord);
+// alert(`💎 强化认知：${affirmation}`);
 
 // ==================== 5. 数据分析与统计 ====================
 function getStats() {
