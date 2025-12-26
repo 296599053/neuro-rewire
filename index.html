@@ -2,44 +2,75 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>🧠 神经重塑器</title>
     <link rel="stylesheet" href="style.css">
-    <!-- 使其可安装到主屏幕 -->
-    <link rel="manifest" href="manifest.json">
+    <!-- 以下配置让网页可以添加到手机主屏幕，并全屏运行 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#f8f9fa">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<link rel="manifest" href="manifest.json">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
 </head>
 <body>
     <div class="container">
+        <!-- 标题区域 -->
         <header class="app-header">
             <h1>🧠 神经重塑器</h1>
-            <p class="subtitle">点击你的旧模式，开始改变</p>
+            <p class="subtitle">点一下 → 动一下 → 记一下</p>
+            <div class="quick-stats">
+                <span id="today-count">今日：0</span>
+                <span> | </span>
+                <span id="total-count">总计：0</span>
+            </div>
         </header>
 
-        <main class="pattern-list" id="patternList">
-            <!-- 旧模式列表将由JavaScript动态生成 -->
+        <!-- 核心：旧模式列表 -->
+        <main>
+            <section class="pattern-section">
+                <h3 class="section-title">🔴 点击你遇到的旧模式</h3>
+                <div class="pattern-list" id="patternList">
+                    <!-- 模式卡片由 app.js 动态生成 -->
+                </div>
+            </section>
+
+            <!-- 数据统计面板 -->
+            <section class="data-section">
+                <h3 class="section-title">📊 我的重塑数据</h3>
+                <div class="stats-panel" id="statsPanel">
+                    <!-- 统计数据由 app.js 动态生成 -->
+                </div>
+                <div class="data-actions">
+                    <button class="btn btn-primary" onclick="exportToMarkdown()">
+                        📥 导出为Obsidian笔记
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearOldData()">
+                        🗑️ 清理旧数据 (保留30天)
+                    </button>
+                </div>
+            </section>
+
+            <!-- 历史记录列表 -->
+            <section class="history-section">
+                <h3 class="section-title">📝 最近记录</h3>
+                <div class="record-list" id="recordList">
+                    <!-- 记录由 app.js 动态生成 -->
+                </div>
+            </section>
         </main>
 
         <footer class="app-footer">
-            <p>极简哲学：觉察 → 中断 → 重建 → 记录</p>
+            <p>知行实验室 · 心理学产品 1.0 | 设计哲学：觉察 → 中断 → 重建 → 记录</p>
         </footer>
     </div>
 
-    <!-- 记录面板 (默认隐藏) -->
-    <div class="record-panel" id="recordPanel" style="display:none;">
-        <div class="record-content">
-            <h3>📝 今日重塑记录</h3>
-            <ul id="recordList"></ul>
-            <button onclick="hideRecords()">关闭</button>
+    <!-- 模态弹窗 (用于执行流程) -->
+    <div class="modal-overlay" id="modalOverlay" style="display:none;">
+        <div class="modal-content" id="modalContent">
+            <!-- 弹窗内容由 app.js 动态生成 -->
         </div>
     </div>
 
+    <!-- 引入核心逻辑 -->
     <script src="app.js"></script>
 </body>
 </html>

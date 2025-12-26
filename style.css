@@ -1,19 +1,330 @@
-* { box-sizing: border-box; }
+/* 基础重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #f8f9fa; color: #212529;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
-.container { max-width: 500px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
-.app-header { background: white; padding: 2rem 1rem 1.5rem; text-align: center; border-bottom: 1px solid #e9ecef; }
-.app-header h1 { margin: 0 0 0.5rem 0; font-size: 1.8rem; }
-.subtitle { color: #6c757d; margin: 0; }
-.pattern-list { padding: 1rem; flex: 1; }
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: env(safe-area-inset-bottom); /* 适配iPhone底部安全区域 */
+}
+
+/* 标题区域 */
+.app-header {
+    background-color: white;
+    padding: 1.5rem 1rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #e9ecef;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.app-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.subtitle {
+    color: #6c757d;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.quick-stats {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+/* 通用章节样式 */
+section {
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #495057;
+    padding: 0 1rem;
+    margin-bottom: 0.75rem;
+}
+
+/* 模式列表 */
+.pattern-list {
+    padding: 0 1rem;
+}
+
 .pattern-card {
-    background: white; border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05); cursor: pointer;
+    background-color: white;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     border-left: 4px solid #fa5252;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
-.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-.card-header h3 { margin: 0; font-size: 1.2rem; }
-.red-dot { width: 10px; height: 10px; background: #fa5252; border-radius: 50%; }
-.app-footer { padding: 1rem; text-align: center; color: #6c757d; font-size: 0.9rem; border-top: 1px solid #e9ecef; background: white; }
+
+.pattern-card:active {
+    transform: scale(0.995);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.pattern-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.red-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #fa5252;
+}
+
+.pattern-desc {
+    color: #495057;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.last-time {
+    color: #868e96;
+    font-size: 0.8rem;
+}
+
+/* 数据统计面板 */
+.data-section {
+    background-color: white;
+    margin: 1rem;
+    padding: 1.25rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.stats-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.stat-card {
+    background-color: #e9f5ff;
+    border-radius: 8px;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1971c2;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #495057;
+}
+
+.pattern-insight {
+    background-color: #fff3bf;
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+}
+
+/* 按钮 */
+.data-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.btn {
+    padding: 0.9rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.btn:active {
+    opacity: 0.85;
+}
+
+.btn-primary {
+    background-color: #339af0;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #f1f3f5;
+    color: #495057;
+}
+
+/* 历史记录列表 */
+.history-section {
+    padding: 0 1rem;
+}
+
+.record-list {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.record-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.record-item:last-child {
+    border-bottom: none;
+}
+
+.record-text {
+    font-size: 0.95rem;
+}
+
+.record-time {
+    font-size: 0.8rem;
+    color: #868e96;
+}
+
+.empty-tip {
+    text-align: center;
+    color: #868e96;
+    padding: 2rem 1rem;
+    font-style: italic;
+}
+
+/* 底部 */
+.app-footer {
+    margin-top: auto;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.8rem;
+    border-top: 1px solid #e9ecef;
+    background-color: white;
+}
+
+/* 模态弹窗 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 1rem;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+    animation: modalAppear 0.2s ease-out;
+}
+
+@keyframes modalAppear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.modal-body {
+    margin-bottom: 1.5rem;
+}
+
+.modal-step {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.step-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+.mood-selector {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.mood-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 2px solid #dee2e6;
+    background-color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mood-btn.selected {
+    border-color: #339af0;
+    background-color: #e7f5ff;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 0.9rem;
+}
